@@ -1,0 +1,12 @@
+1. Mir ist aufgefallen dass ich in NumPyFormance_2 in der handwrittenpyfunc nicht so effizient war wie ich es hätte sein können...
+wie geht es denn effizienter?
+##########
+hints:
+for schleifen sind soooooo langsam und wir wollen so wenig wie möglich davon.... oder?
+##########
+2. wowwww mich interessiert ja mal SOWASVON wie ineffizient rekursion dabei wäre .... :)
+##########
+hints:
+japp ihr sollt mal die pyfunc aus PyFormance rekursiv schreiben
+also lasst ihr das solange rekursiv laufen bis ihr eine liste der länge x habt und dann gucken wir mal
+###########
