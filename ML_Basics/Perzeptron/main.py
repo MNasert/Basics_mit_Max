@@ -40,8 +40,8 @@ x = np.array([[[1], [1]],[[1], [0]],[[0], [1]], [[0],[0]]])#Dummy data
 y = np.array([[1], [0], [0], [0]])#dummy target
 losses = []
 ls = 0
-perz = Perzeptron(2, 1, lr=1e-3)#dummy net
-for epoch in range(10000):#wie viele Epochen rechnen wir?
+perz = Perzeptron(2, 1, lr=.1)#dummy net
+for epoch in range(10):#wie viele Epochen rechnen wir?
     for i in range(len(x)):#wir iterieren über alle elemente in der dummy data
         n = perz.forward(x[i])#forward
         loss = .5*(y[i]-n)**2#was ist unser loss? (hier erstmal irrelevant- wird in späteren projekten wichtig

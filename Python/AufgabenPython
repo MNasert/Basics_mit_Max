@@ -3,7 +3,7 @@ Schreibt einen Chatbot der:
 
 Zuerst nach dem Namen fragt
 dann sagt er "wow, hallo" name
-dann nach dem Alter
+dann nach dem int(Alter)
 wenn ihr über 112 oder unter 5 jahren seid dann:
     soll er sagen "das stimmt nicht"
 und dann nach eurem Befinden
@@ -15,7 +15,7 @@ ansonsten:
 hints:
 x = input("FRAGE_ODER_AUSSAGE") lässt euch in der Kommandozeile eine variable zur lauzeit vom nutzer eingeben
 bsp: code:
-x = input("aus welchem land kommst du"
+x = input("aus welchem land kommst du")
 print(x)
 prompt:
 aus welchem land kommst du?deutschland
@@ -36,6 +36,7 @@ oder ihr guckt euch mal an was listen können
 macht mal eine methode die das rekursionsmaximum um 1 unterschreitet
 #########################
 hints:
+zeile 1 -> import sys
 x = sys.getrecursionlimit() lässt euch herausfinden was das rekursionslimit ist
 #########################
 5. nach commandline:

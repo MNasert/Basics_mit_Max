@@ -1,6 +1,6 @@
 # wir basteln eine methode die sich selbst aufruft, bis ein ereignis eingetreten ist
 def rekursion(n, q):
-    if n < 0:
+    if n == 0:
         print("geschafft nach {} rekursionen".format(q))
     else:
         rekursion(n-1, q+1)

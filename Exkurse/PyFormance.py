@@ -21,5 +21,5 @@ if __name__ == "__main__":
 #wir versuchen auf einen integer einen double zu rechnen- theoretisch möglich; heißt aber dass wir dann einfach binär alle zahlen rüberschieben
 #ergo: wir haben bei 3 + 0.1 nicht 3 + 0.1 sondern 3 + 1E-1-> wir haben 11 + 0,0001,1000000000000000000000001- was die rechnung ad absurdum führt
 #in interpretierten sprachen erkennt der interpreter: oh datentyp wechseln
-#also kopieren wir den inhalt aus &x an ein *x1; wandeln es in einen double um und führen dann die operation durch
+#also kopieren wir den inhalt aus &x an ein &x1; wandeln es in einen double um und führen dann die operation durch
 #wir haben somit viel mehr speicheroperationen und- speicheroperationen sind die langsamste operation (lesen ausgenommen)
