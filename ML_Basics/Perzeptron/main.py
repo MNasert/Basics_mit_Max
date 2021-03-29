@@ -36,6 +36,8 @@ class Perzeptron:
         self.wm = self.wm - self.lr*self.grd
         #Da ein Gradient immer auf das MAXIMUM deutet, müssen wir den Gradienten von unserem Gewicht abziehen
 
+
+
 x = np.array([[[1], [1]],[[1], [0]],[[0], [1]], [[0],[0]]])#Dummy data
 y = np.array([[1], [0], [0], [0]])#dummy target
 losses = []
@@ -55,3 +57,4 @@ plt.plot(np.arange(len(losses)), losses)#wir plotten alle losses
 plt.xlabel("epochs")#xlabel
 plt.ylabel("loss")#ylabel
 plt.show()#anzeigen
+#wir machen das aber live in jupyter (und einfacher)
