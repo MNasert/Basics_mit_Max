@@ -10,6 +10,6 @@ if __name__ == "__main__":
     rekursion(200, 0)
 
 
-#Vorteile: Was für Vorteile? Man braucht die manchmal einfach z.B. in rekurrenten neuronalen netzen
+#Vorteile: Was für Vorteile? Man braucht die manchmal einfach
 #Nachteile: alles was wir bis zur n. rekursion gemacht haben muss auch rückwärts nachgerechnet werden damit die methode abgeschlossen ist
 #Außerdem haben wir ein rekursionslimit
