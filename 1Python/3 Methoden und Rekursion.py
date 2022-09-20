@@ -47,4 +47,3 @@ def rekursion(n, q):
 
 # Danach kannst du in "DatOps" sehen, wie man Dateien liest & schreibt und in CommandLine.py findest du, wie man
 # Python Programme mittels Kommandozeile benutzen kann
-# Dann geh zu 2NumPy
