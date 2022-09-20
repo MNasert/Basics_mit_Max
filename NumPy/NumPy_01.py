@@ -4,7 +4,7 @@ ls = [1, 2, 3, 4, 5]#Wir erstellen eine Liste mit ein paar zahlen
 ls = np.array(ls)#wir machen daraus einen anderen datentyp
 print(type(ls))#ist ein ndarray?
 print(ls.dtype)#ein ndarray aus int32ern!
-#NumPy ist mit C optimiert und ermöglicht uns viel effektivere Möglichkeiten zu rechnen als wir mit Python allein könnten
+#NumPy ist mit C optimiert und ermöglicht uns viel effektivere Möglichkeiten zu rechnen als wir mit 1Python allein könnten
 #Wir können sehr viel rechen und speicherlast einsparen wenn wir numpy anstelle von listen u co benutzen
 #außerdem hat numpy viele coole dinge die man machen kann
 a = np.array([1, 2, 3, 4])
