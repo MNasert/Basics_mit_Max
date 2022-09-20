@@ -41,3 +41,10 @@ class Mensch:
 alter = int(input("Wie alt bist du?\n"))  # Wir lesen eine Variable ein
 du = Mensch(alter)
 print(du.alter)
+
+# Aufgaben:
+# 1 füge in die Klasse Mensch einen Namen und mache, dass man ihn
+# zum Anfang angeben kann
+# 2 belese dich über Vererbung und mache eine Mann & Frau Klasse,
+# die von Mensch erbt
+# dann ab zu 2 NumPy
