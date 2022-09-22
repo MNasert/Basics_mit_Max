@@ -62,6 +62,38 @@ class Menschengruppe:
 # 1 füge in die Klasse Mensch einen Namen und mache, dass man ihn
 # zum Anfang angeben kann
 # 2 belese dich über Vererbung und mache eine Mann & eine Frau Klasse. beide sollen von Mensch erben
+# 3 schreibe eine Punktklasse, und eine Dreieckklasse, die Dreieckklasse soll 3 Punkte entgegennehmen und:
+#   - den flächeninhalt ausgeben können
+#   - gucken können ob ein Punkt-Objekt _im_ aufgespannten Dreieck ist
+#   - Bewegbar sein um ein dx und ein dy und dann eine Dreieck-Objekt zurückgeben
+#   Startcode zum weitermachen:
+class Punkt:
+    def __init__(self, x: float, y: float) -> None:
+        self.x = x
+        self.y = y
+
+    # ggf move methode?
+
+class Dreieck:
+    def __init__(self, punkte: list[Punkt]) -> None:
+        if len(punkte) != 3:
+            raise ValueError("Es werden genau 3 Punkte erwartet")  # Wenn wir nicht 3 Punkte haben, werfen wir einen -
+            # Fehler
+        self.punkte = punkte
+
+    def get_flaecheninhalt(self) -> float:
+        flaecheninhalt = 0.0
+        # hier rechnen -> a*b / 2, wobei flaecheninhalt = ((max_x -min_x) * (max_y - min_y)) / 2
+        return flaecheninhalt
+
+    def move_dreieck(self, dx, dy) -> object:  # warum object? wir können hier kein Dreieck angeben, weil Python
+                                                # den Datentyp "Dreieck" noch nicht kennt, da jedes mal alles neu-
+                                                # interpretiert werden muss
+        # hier drei Punkte ausrechnen
+        punkte = []  # hier sollen die generierten Punkte gesammelt werden (WICHTIG: die bestehenden Punkte
+                                                # dürfen _nicht geändert werden, sondern du brauchst neue Punkte
+                                                # vielleicht erst eine move_punkt methode in der Punkt-Klasse schreiben?
+        return Dreieck(punkte)  # hier soll am ende ein Dreieck zurückgegeben werden
 
 # dann kannst du dir DatOps und CommandLine ansehen
 # dann ab zu 2 NumPy
