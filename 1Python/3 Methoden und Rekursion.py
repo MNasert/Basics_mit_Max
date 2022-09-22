@@ -62,7 +62,12 @@ print(methode())
 
 # Aufgaben:
 # 1 Schreibe eine Methode, die eine Liste entgegennimmt und das Produkt aller einträge bildet
+    # tipp: for schleife
 # 2 Schreibe eine rekursive Methode, die das Programm zum Absturz bringt (es gibt ein rekursionsmaximum)
 # 3 Schreibe die fibonacci Reihe rekursiv als Methode
-
+# tipp:
+# def rec_fib(depth):
+#     if depth > 1:
+#         return rec_fib(depth - irgendwas) + rec_fib(depth - irgendwas2)
+#     return depth
 # danach ab zu 4 Objektorientierte programmierung
