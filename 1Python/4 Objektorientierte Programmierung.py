@@ -61,6 +61,7 @@ class Menschengruppe:
 # Aufgaben:
 # 1 füge in die Klasse Mensch einen Namen und mache, dass man ihn
 # zum Anfang angeben kann
-# 2 belese dich über Vererbung und mache eine Mann & Frau Klasse,
-# die von Mensch erbt
+# 2 belese dich über Vererbung und mache eine Mann & eine Frau Klasse. beide sollen von Mensch erben
+
+# dann kannst du dir DatOps und CommandLine ansehen
 # dann ab zu 2 NumPy

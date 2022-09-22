@@ -48,6 +48,18 @@ rekursion(10, 0)
 # Diese Methode ruft sich selbst wieder auf, .format() fügt der reihe nach variablen in {} ein
 # alternativ: print(f"geschafft nach {q} rekursionen"), mit f"" geht das auch einfach so
 
+# abschließend: man kann auf "default" Argumente angeben:
+
+
+def methode(variable: int = 0) -> int:
+    # Die Methode "Methode" nimmt einen int entgegen, wird keiner angegeben, dann wird "variable = 0" angenommen
+    return variable + 1
+
+
+print(methode(0))
+print(methode())
+# und damit sind die ausgaben dieser beiden methodenaufrufe gleich
+
 # Aufgaben:
 # 1 Schreibe eine Methode, die eine Liste entgegennimmt und das Produkt aller einträge bildet
 # 2 Schreibe eine rekursive Methode, die das Programm zum Absturz bringt (es gibt ein rekursionsmaximum)
