@@ -3,21 +3,21 @@ import matplotlib.pyplot as plt
 
 
 class Perzeptron:
-    def __init__(self, insize, outsize, lr):
+    def __init__(self, insize, outsize, lr) -> None:
         self.wm = np.random.rand(insize, outsize)  # dann müssen wir seltener transponieren
         self.in_prev = None
         self.out_prev = None
         self.lr = lr
         self.grd = None
 
-    def forward(self, _x):
+    def forward(self, _x) -> np.ndarray:
         self.in_prev = _x
         # x hat den shape [1,insize] wm hat den shape [outsize, insize]
         _x = _x.T @ self.wm  # 1,insize * insize, outsize
         self.out_prev = x
         return x
 
-    def backward(self, target):
+    def backward(self, target) -> None:
         # wir benutzen nach newton das gradientenverfahren um das lokale minimum zu erreichen
         # wir haben als funktion:
         # y = w * x
@@ -33,16 +33,16 @@ class Perzeptron:
         # damit ist dL/dw = x*(y-Y)
         self.grd = self.in_prev * (self.out_prev - target)
 
-    def step(self):
+    def step(self) -> None:
         self.wm = self.wm - self.lr*self.grd
         # Da der Gradient auf das MAXIMUM deutet, müssen wir den Gradienten von unserem Gewicht abziehen
 
 
-x = np.array([[[1], [1]],[[1], [0]],[[0], [1]], [[0],[0]]])  # Dummy data
-y = np.array([[1], [0], [0], [0]])  # dummy target
+x = np.array([[[1], [1]], [[1], [0]], [[0], [1]], [[0], [0]]])  # Die Und-Funktion
+y = np.array([[1], [0], [0], [0]])  # und der Ausgabewert für die Und-Funktion
 losses = []
 ls = 0
-perz = Perzeptron(2, 1, lr=.1)  # dummy net
+perz = Perzeptron(2, 1, lr=.1)  # unser Perzeptron/ neuronales Netz
 for epoch in range(10):  # wie viele Epochen rechnen wir?
     for i in range(len(x)):  # wir iterieren über alle elemente in der dummy data
         n = perz.forward(x[i])  # forward
@@ -57,4 +57,6 @@ plt.plot(np.arange(len(losses)), losses)  # wir plotten alle losses
 plt.xlabel("epochs")  # xlabel
 plt.ylabel("loss")  # ylabel
 plt.show()  # anzeigen
-# optional:  wir machen das aber live in jupyter (und einfacher)
+
+# Aufgabe: Versuche das selbe mit der ODER, XOR und NAND Funktion
+#           Welche davon funktionieren? welche nicht? warum?
