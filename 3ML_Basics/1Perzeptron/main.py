@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+
 class Perzeptron:
     def __init__(self, insize, outsize, lr=.1) -> None:  # lr ist ein modifikator für unseren gradienten
         self.wm = np.random.rand(insize, outsize)  # unsere weight - Matrix
@@ -77,6 +78,7 @@ plt.xlabel("Epoche")
 plt.ylabel("Fehler")
 plt.show()
 
-
-# Aufgabe: Versuche das selbe mit der ODER, XOR und NAND Funktion
+# 1 Aufgabe: Wie müssen wir die Ergebnisse deuten, um tatsächlich Vorhersagen machen zu können?
+# 2 Aufgabe: Versuche das selbe mit der ODER, XOR und NAND Funktion
 #           Welche davon funktionieren? welche nicht? warum?
+#           Und wie müssen die Daten bei den jeweiligen Methoden gedeutet werden?
