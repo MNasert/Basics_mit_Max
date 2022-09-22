@@ -78,7 +78,7 @@ class Dreieck:
     def __init__(self, punkte: list[Punkt]) -> None:
         if len(punkte) != 3:
             raise ValueError("Es werden genau 3 Punkte erwartet")  # Wenn wir nicht 3 Punkte haben, werfen wir einen -
-            # Fehler
+                                                                   # Fehler
         self.punkte = punkte
 
     def get_flaecheninhalt(self) -> float:
