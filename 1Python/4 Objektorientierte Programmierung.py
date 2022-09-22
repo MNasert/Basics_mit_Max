@@ -26,21 +26,37 @@ class Mensch:
 alter = int(input("Wie alt bist du?\n"))  # Wir lesen eine Variable ein
 du = Mensch(alter)
 print(du.alter)
+# wichtig: self gibt die "Referenz auf sich selbst" d.h. wenn wir self benutzen, dann meinen wir _dieses_ Objekt
 # Und auch hier kann man noch andere Methoden definieren
 # Wir überschreiben wieder
 
+
 class Mensch:
-    def __init__(self, alter: int):
+    def __init__(self, alter: int) -> None:
         self.alter = alter
         print(self)
 
-    def aelter_werden(self):
+    def aelter_werden(self) -> None:
         self.alter += 1
 
 
 alter = int(input("Wie alt bist du?\n"))  # Wir lesen eine Variable ein
 du = Mensch(alter)
 print(du.alter)
+
+# Eine Klasse kann auch andere Klassen als Objekte bzw. Attribute in sich haben:
+
+
+class Menschengruppe:
+    def __init__(self, menschen: list[Mensch]) -> None:  # wir können so auch datentypen angeben (list[Mensch])
+        self.menschen = menschen
+
+    def durchschnittsalter(self) -> float:
+        _alter = 0
+        for mensch in self.menschen:  # wir gehen über jeden Mensch in unserer Menschengruppe
+            _alter += mensch.alter
+        return _alter/len(self.menschen)
+
 
 # Aufgaben:
 # 1 füge in die Klasse Mensch einen Namen und mache, dass man ihn

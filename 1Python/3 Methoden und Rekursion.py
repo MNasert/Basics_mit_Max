@@ -31,11 +31,19 @@ print(do_something(some_number=10))
 # Rekursion:
 
 
-def rekursion(n, q):
+def rekursion(n, recursion_counter):
     if n == 0:  # sobald n == 0 wird wollen wir aufhören
-        print("geschafft nach {} rekursionen".format(q))
+        print("geschafft nach {} rekursionen".format(recursion_counter))
+        # alternativ: print(f"geschafft nach {recursion_counter} rekursionen")
     else:
-        rekursion(n-1, q+1)
+        rekursion(n-1, recursion_counter+1)  # wir führen die Methode nochmal aus, ziehen aber 1 von unserem initialem
+        # n ab und zählen den counter hoch um 1
+        # bsp: rekursion(1, 0):
+        # n != 0 -> wir führen rekursion() mit n= 1-1 und counter= 0 + 1 aus
+        # dann n == 0 -> wir schreiben "geschafft nach 1 rekursionen"
+
+
+rekursion(10, 0)
 
 # Diese Methode ruft sich selbst wieder auf, .format() fügt der reihe nach variablen in {} ein
 # alternativ: print(f"geschafft nach {q} rekursionen"), mit f"" geht das auch einfach so
