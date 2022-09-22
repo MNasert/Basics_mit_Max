@@ -1,62 +1,82 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-
 class Perzeptron:
-    def __init__(self, insize, outsize, lr) -> None:
-        self.wm = np.random.rand(insize, outsize)  # dann müssen wir seltener transponieren
-        self.in_prev = None
-        self.out_prev = None
+    def __init__(self, insize, outsize, lr=.1) -> None:  # lr ist ein modifikator für unseren gradienten
+        self.wm = np.random.rand(insize, outsize)  # unsere weight - Matrix
+        self.prev_x = None
+        self.grad = None
+        self.prev_out = None
+
+        self.insize = insize
+        self.outsize = outsize
         self.lr = lr
-        self.grd = None
 
-    def forward(self, _x) -> np.ndarray:
-        self.in_prev = _x
-        # x hat den shape [1,insize] wm hat den shape [outsize, insize]
-        _x = _x.T @ self.wm  # 1,insize * insize, outsize
-        self.out_prev = x
-        return x
+    def forward(self, ipt: np.ndarray) -> np.ndarray:
+        self.prev_x = ipt
+        self.prev_out = ipt @ self.wm  # ipt * weight
+        return self.prev_out  # [1, insize] x [insize, outsize] = [1, outsize]
 
-    def backward(self, target) -> None:
-        # wir benutzen nach newton das gradientenverfahren um das lokale minimum zu erreichen
-        # wir haben als funktion:
-        # y = w * x
-        # der fehler ist L = 1/2(Y-y)^2 (wir nehmen einfach den mittl. quad fehler)
-        # also ist L = (Y-(w * x))^2
-        # wir müssen also partiell nach w ableiten
-        # fangen wir mal an:
-        # wir wollen dL/dw = dL/dy * dy/dw: alsoooo:
-        # dL/dy = 1/2(Y^2 - 2Yy +y^2)'
-        #      = 1/2(0 - 2Y +2y)
-        #      = y-Y
-        # dy/dw = x
-        # damit ist dL/dw = x*(y-Y)
-        self.grd = self.in_prev * (self.out_prev - target)
+    def backward(self, target: np.ndarray) -> None:
+        # wir rechnen ja: y = x * wm
+        # also brauchen wir eine Metrik, um den Fehler auszurechnen: wir nehmen den mittl. quad. fehler:
+        # L = (1/ insize) * (target - prediction) ^ 2
+        # = (1/ insize) * (target^2 - 2*target*prediction + prediction^2)
+        # also rechnen wir:
+        # dL/dprediction =  (1/insize) * (2*prediction - 2*target)
+        # dann dprediction/dwm = x
+        # also ist dL/dwm = dL/dprediction * dprediction/dwm = (1/insize) * x * (2*prediction - 2*target)
+        # also
+        self.grad = (1/self.insize) * self.prev_x * (self.prev_out - target)
 
     def step(self) -> None:
-        self.wm = self.wm - self.lr*self.grd
-        # Da der Gradient auf das MAXIMUM deutet, müssen wir den Gradienten von unserem Gewicht abziehen
+        # der gradient deutet in richtung maximum also rechnen wir - den gradienten:
+        self.wm -= self.lr * self.grad.T  # wir müssen transponieren, da:
+        # wm = [insize, outsize], grad aber = [outsize, insize]
 
 
-x = np.array([[[1], [1]], [[1], [0]], [[0], [1]], [[0], [0]]])  # Die Und-Funktion
-y = np.array([[1], [0], [0], [0]])  # und der Ausgabewert für die Und-Funktion
-losses = []
-ls = 0
-perz = Perzeptron(2, 1, lr=.1)  # unser Perzeptron/ neuronales Netz
-for epoch in range(10):  # wie viele Epochen rechnen wir?
-    for i in range(len(x)):  # wir iterieren über alle elemente in der dummy data
-        n = perz.forward(x[i])  # forward
-        loss = .5*(y[i]-n)**2  # was ist unser loss? (hier erstmal irrelevant- wird in späteren projekten wichtig
-        perz.backward(y[i])  # backward
-        perz.step()  # update der parameter
-        ls += loss  # wir rechnen erstmal den ganzen loss zusammen
-    losses.append(ls.squeeze()/len(x))  # dann gucken wir wie groß der mittlere fehler auf den daten ist und merken uns das
-    ls = 0  # dann mal den laufparameter auf null setzen
+# UND funktion - input
+x = np.array([
+    [[1, 1]],
+    [[1, 0]],
+    [[0, 1]],
+    [[0, 0]]
+])
+# UND funktion output
+y = np.array([
+    [[1]],
+    [[0]],
+    [[0]],
+    [[0]]
+])
 
-plt.plot(np.arange(len(losses)), losses)  # wir plotten alle losses
-plt.xlabel("epochs")  # xlabel
-plt.ylabel("loss")  # ylabel
-plt.show()  # anzeigen
+net = Perzeptron(2, 1, .1)  # wir erstellen eine Perzeptron instanz
+
+
+def linear_loss(pred, targ) -> any:  # warum any? es kann eine zahl aber auch ein np.ndarray rauskommen -> wir könnten auch
+    # sagen float or np.ndarray aber das ist nicht hübsch
+    return (pred - targ)**2  # ziel - start, einfach der abstand
+
+
+loss_history = []  # fehler pro instanz
+global_loss = []  # fehler pro epoche
+
+for epoch in range(20):
+    for idx in range(len(x)):
+        out = net.forward(x[idx])
+        net.backward(y[idx])
+        net.step()
+        loss_history.append(linear_loss(out.squeeze(), y[idx].squeeze()))
+    global_loss.append(sum(loss_history)/len(loss_history))
+    loss_history = []
+
+# und hier erstellen wir einen graphen, der erste parameter ist das x ( wir erstellen eine liste mit 0,1,2,3 ...)
+# der zweite ist unsere losshistory
+plt.plot(np.arange(len(global_loss)), global_loss)
+plt.xlabel("Epoche")
+plt.ylabel("Fehler")
+plt.show()
+
 
 # Aufgabe: Versuche das selbe mit der ODER, XOR und NAND Funktion
 #           Welche davon funktionieren? welche nicht? warum?
