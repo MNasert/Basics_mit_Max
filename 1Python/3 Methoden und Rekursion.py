@@ -53,5 +53,4 @@ rekursion(10, 0)
 # 2 Schreibe eine rekursive Methode, die das Programm zum Absturz bringt (es gibt ein rekursionsmaximum)
 # 3 Schreibe die fibonacci Reihe rekursiv als Methode
 
-# Danach kannst du in "DatOps" sehen, wie man Dateien liest & schreibt und in CommandLine.py findest du, wie man
-# Python Programme mittels Kommandozeile benutzen kann
+# danach ab zu 4 Objektorientierte programmierung
