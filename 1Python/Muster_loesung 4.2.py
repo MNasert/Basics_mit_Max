@@ -15,11 +15,10 @@ class Mensch:
         self.gender = None
 
     # Hier kommen Methoden, die jede Unterklasse haben muss
-    def say_something(self, something) -> None:
+    def say_something(self, something: str) -> None:
         """
         Here could be a proper description of this method
         :param something: here could be put a proper description of this parameter
-        :return:
         """
 
         if not self.gender:
@@ -46,7 +45,7 @@ class Mann(Mensch):
         super(Mann, self).__init__(name, age)
         self.gender = "M"
 
-    def say_something(self, something) -> None:
+    def say_something(self, something: str) -> None:
         super(Mann, self).say_something(something)  # Könnten wir optional auch machen, da wir aber nix an der
         # Methode ändern, brauchen wir das nicht
         # Hier machen wir das selbe wie in der init - Methode:
