@@ -49,6 +49,9 @@ class Mann(Mensch):
     def say_something(self, something) -> None:
         super(Mann, self).say_something(something)  # Könnten wir optional auch machen, da wir aber nix an der
         # Methode ändern, brauchen wir das nicht
+        # Hier machen wir das selbe wie in der init - Methode:
+        # Wir rufen die Methode des parents auf und starten sie, stattdessen könnten wir jetzt zb. noch etwas anfügen,
+        # wollen wir aber nicht
 
 
 class Frau(Mensch):
