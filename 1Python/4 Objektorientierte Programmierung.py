@@ -74,6 +74,7 @@ class Punkt:
 
     # ggf move methode?
 
+
 class Dreieck:
     def __init__(self, punkte: list[Punkt]) -> None:
         if len(punkte) != 3:
