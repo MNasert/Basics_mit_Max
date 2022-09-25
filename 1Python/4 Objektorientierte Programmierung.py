@@ -82,6 +82,9 @@ class Dreieck:
                                                                    # Fehler
         self.punkte = punkte
 
+    def intersects(self, Punkt: Punkt):
+        return False
+
     def get_flaecheninhalt(self) -> float:
         flaecheninhalt = 0.0
         # hier rechnen -> a*b / 2, wobei flaecheninhalt = ((max_x -min_x) * (max_y - min_y)) / 2
