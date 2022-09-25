@@ -39,8 +39,8 @@ print(eine_Liste)  # moment? wir müssen nicht eine_Liste = eine_Liste.pop(0) ma
 eine_Liste.extend(range(10))
 print(eine_Liste)  # wir können einen generator übergeben und generieren damit objekte
 
-# wir können auch herausfinden, wieviele Elemente in einer Liste sind?
-
+# wir können auch herausfinden, wieviele Elemente in einer Liste sind
+print(len(eine_Liste), "Elemente in der Liste")
 
 # der boolean
 yes = True
