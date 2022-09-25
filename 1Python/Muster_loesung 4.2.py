@@ -46,6 +46,10 @@ class Mann(Mensch):
         super(Mann, self).__init__(name, age)
         self.gender = "M"
 
+    def say_something(self, something) -> None:
+        super(Mann, self).say_something(something)  # Könnten wir optional auch machen, da wir aber nix an der
+        # Methode ändern, brauchen wir das nicht
+
 
 class Frau(Mensch):
     def __init__(self, name: str, age: int) -> None:
