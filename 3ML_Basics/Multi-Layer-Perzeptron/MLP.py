@@ -23,6 +23,7 @@
 #       =  Y-y  *       w    *    sg(y_1)(1-sg(y_1))   *    w_2    *  sg(y_2)(1-sg(y_2))
 # Und nun in Code umsetzen
 
+
 # Aufgabe 2:
 # Schreibe: Eine Klasse, die eine Liste von "Layern" (Anderen Klassen) entgegennimmt und es ermöglicht, beliebig große
 # Netze zu erstellen (Diese Aufgabe ist sehr schwer)
@@ -34,29 +35,31 @@ import numpy as np
 
 
 class Layer:
-    def __init__(self):
+    def __init__(self) -> None:
         self.wm = None
         self.bm = None
         self.gradW = None
         self.gradB = None
+        self.prevX = None
 
-    def forward(self, x):
+    def forward(self, x) -> any:
         raise NotImplementedError
 
-    def backward(self, grad):
+    def backward(self, grad) -> any:
         raise NotImplementedError
 
-    def step(self):
+    def step(self) -> None:
         raise NotImplementedError
 
 
 class LinearLayer(Layer):
-    def __init__(self, insize, outsize):
+    def __init__(self, insize, outsize) -> None:
         super(LinearLayer, self).__init__()
         self.wm = np.random.rand(insize, outsize)
         self.bm = np.random.rand(1, outsize)
 
     def forward(self, x) -> np.ndarray:
+        self.prevX = x
         return x @ self.wm + self.bm
 
     def backward(self, grad) -> tuple[any, any]:
@@ -64,44 +67,43 @@ class LinearLayer(Layer):
         self.gradB = None  # hier Berechnung
         return self.gradW, self.gradB
 
-    def step(self):
+    def step(self) -> None:
         self.wm -= self.gradW
         self.bm -= self.gradB
 
 
 class Sigmoid(Layer):
-    def __init__(self):
+    def __init__(self) -> None:
         super(Sigmoid, self).__init__()
         pass
 
     def forward(self, x) -> any:
+        self.prevX = x
         return 0  # hier sigmoidfunktion implementieren
 
     def backward(self, grad) -> tuple[any, any]:
         return 0, 0  # hier gradienten berechnen
 
-    def step(self):
+    def step(self) -> None:
         pass
 
 
 class Sequential:
-    def __init__(self, layers: list[Layer]):
+    def __init__(self, layers: list[Layer]) -> None:
         self.layers = layers
         self.prev_out = None
         self.prev_in = None
 
-    def forward(self, x):
+    def forward(self, x) -> any:
         out = x
         for layer in self.layers:
             out = layer.forward(x)
         return out
 
-    def backward(self, target):
+    def backward(self, target) -> None:
         for layer in reversed(self.layers):
             target = layer.backward(target)
 
-    def step(self):
+    def step(self) -> None:
         for layer in self.layers:
             layer.step()
-
-
