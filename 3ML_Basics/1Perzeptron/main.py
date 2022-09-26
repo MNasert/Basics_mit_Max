@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 class Perzeptron:
     def __init__(self, insize, outsize, lr=.1) -> None:  # lr ist ein modifikator für unseren gradienten
-        self.wm = np.random.rand(insize, outsize)  # unsere weight - Matrix
+        self.wm = np.random.rand(insize, outsize)  # unsere weight - Matrix der Form [insize, outsize]
         self.prev_x = None
         self.grad = None
         self.prev_out = None
@@ -38,10 +38,10 @@ class Perzeptron:
 
 # UND funktion - input
 x = np.array([
-    [[1, 1]],
-    [[1, 0]],
-    [[0, 1]],
-    [[0, 0]]
+        [[1, 1]],
+        [[1, 0]],
+        [[0, 1]],
+        [[0, 0]]
 ])
 # UND funktion output
 y = np.array([
@@ -52,9 +52,10 @@ y = np.array([
 ])
 
 net = Perzeptron(2, 1, .1)  # wir erstellen eine Perzeptron instanz
+print(f"net weights: {net.wm} \n")
 
 
-def linear_loss(pred, targ) -> any:  # warum any? es kann eine zahl aber auch ein np.ndarray rauskommen -> wir könnten auch
+def quad_loss(pred, targ) -> any:  # warum any? es kann eine zahl aber auch ein np.ndarray rauskommen -> wir könnten auch
     # sagen float or np.ndarray aber das ist nicht hübsch
     return (pred - targ)**2  # ziel - start, einfach der abstand
 
@@ -67,12 +68,19 @@ for epoch in range(20):
         out = net.forward(x[idx])
         net.backward(y[idx])
         net.step()
-        loss_history.append(linear_loss(out.squeeze(), y[idx].squeeze()))
+        loss_history.append(quad_loss(out.squeeze(), y[idx].squeeze()))
     global_loss.append(sum(loss_history)/len(loss_history))
     loss_history = []
 
 # und hier erstellen wir einen graphen, der erste parameter ist das x ( wir erstellen eine liste mit 0,1,2,3 ...)
 # der zweite ist unsere losshistory
+
+
+print(f"net weights: {net.wm} \n")
+for _ in x:
+    print(f"{_} -> net -> {net.forward(_)}")
+
+
 plt.plot(np.arange(len(global_loss)), global_loss)
 plt.xlabel("Epoche")
 plt.ylabel("Fehler")

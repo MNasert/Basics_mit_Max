@@ -72,7 +72,16 @@ class Punkt:
         self.x = x
         self.y = y
 
-    # ggf move methode?
+    def move(self, dx: float, dy: float):
+        new_x = self.x + dx
+        new_y = self.y + dy
+        return Punkt(x=new_x, y=new_y)
+
+
+punktA = Punkt(3, 3)
+print("punktA ist bei:", punktA.x, punktA.y)
+punktB = punktA.move(1, 4)
+print("punktB ist bei:", punktB.x, punktB.y)
 
 
 class Dreieck:
@@ -88,16 +97,62 @@ class Dreieck:
     def get_flaecheninhalt(self) -> float:
         flaecheninhalt = 0.0
         # hier rechnen -> a*b / 2, wobei flaecheninhalt = ((max_x -min_x) * (max_y - min_y)) / 2
+        x_min = self.punkte[0].x
+        x_max = self.punkte[0].x
+        y_min = self.punkte[0].y
+        y_max = self.punkte[0].y
+        for punkt in self.punkte:
+            if punkt.x < x_min:
+                x_min = punkt.x
+
+            if punkt.x > x_min:
+                x_max = punkt.x
+
+            if punkt.y < y_min:
+                y_min = punkt.y
+
+                y_max = punkt.y
+
+        flaecheninhalt = (x_max - x_min) * (y_max - y_min) * 0.5
         return flaecheninhalt
 
-    def move_dreieck(self, dx: float, dy: float) -> object:  # warum object? wir können hier kein Dreieck angeben, weil Python
+    def move_dreieck(self, dx: float, dy: float):  # warum object? wir können hier kein Dreieck angeben, weil Python
                                                 # den Datentyp "Dreieck" noch nicht kennt, da jedes mal alles neu-
                                                 # interpretiert werden muss
         # hier drei Punkte ausrechnen
         punkte = []  # hier sollen die generierten Punkte gesammelt werden (WICHTIG: die bestehenden Punkte
                                                 # dürfen _nicht geändert werden, sondern du brauchst neue Punkte
                                                 # vielleicht erst eine move_punkt methode in der Punkt-Klasse schreiben?
+        for punkt in self.punkte:
+            punkte.append(punkt.move(dx, dy))
+
         return Dreieck(punkte)  # hier soll am ende ein Dreieck zurückgegeben werden
+
+
+A = Punkt(0, 0)
+B = Punkt(-1, 0)
+C = Punkt(0, -1)
+DreieckA = Dreieck([A, B, C])
+DreieckB = DreieckA.move_dreieck(1, 1)
+
+print(DreieckA.get_flaecheninhalt())
+print(DreieckB.get_flaecheninhalt())
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # dann kannst du dir DatOps und CommandLine ansehen
 # dann ab zu 2 NumPy
