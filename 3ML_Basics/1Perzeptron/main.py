@@ -63,7 +63,7 @@ def quad_loss(pred, targ) -> any:  # warum any? es kann eine zahl aber auch ein 
 loss_history = []  # fehler pro instanz
 global_loss = []  # fehler pro epoche
 
-for epoch in range(20):
+for epoch in range(30):
     for idx in range(len(x)):
         out = net.forward(x[idx])
         net.backward(y[idx])
@@ -80,6 +80,9 @@ print(f"net weights: {net.wm} \n")
 for _ in x:
     print(f"{_} -> net -> {net.forward(_)}")
 
+print("Nach der Deutung:")
+for _ in x:
+    print(f"{_} -> net -> {round(net.forward(_).item())}")
 
 plt.plot(np.arange(len(global_loss)), global_loss)
 plt.xlabel("Epoche")
