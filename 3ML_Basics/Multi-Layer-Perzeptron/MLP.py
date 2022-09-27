@@ -14,13 +14,13 @@
 # z_2 = sigmoid(y_2) -> Unsere Non-Linearity nach Layer 2
 # y = w_3 * z_2 + b_3 -> Unser Output - Ergebnis nach Layer 3
 
-# dL/dw  = dL/dy * dy/dw
-# dL/dw2 = dL/dy * dy/dz_1 * dz_2/dy_1 * dy_1/dw_2
-# dL/dw3 = dL/dy * dy/dz_1 * dz_2/dy_1 * dy_1/dz_2 * dz_2/dy_2 * dy_2/dw_3
-# dL/b   = dL/dy * dy/db
-# dL/b2  = dL/dy * dy/dz_1 * dz_2/dy_1 * dy_1/db_2
-# dL/b3  = dL/dy *    dy/dz_1 *         dz_1/dy_1       * dy_1/z_2  *      dz_2/dy_2          * dy_2/db_3
-#       =  Y-y  *       w    *    sg(y_1)(1-sg(y_1))   *    w_2    *  sg(y_2)(1-sg(y_2))
+# dL/dw_3  = dL/dy * dy/dw_3
+# dL/dw_2 = dL/dy * dy/dz_2 * dz_2/dy_2 * dy_2/dw_2
+# dL/dw_1 = dL/dy * dy/dz_2 * dz_2/dy_2 * dy_2/dz_1 * dz_1/dy_1 * dy_1/dw_1
+# dL/b_3   = dL/dy * dy/db_3
+# dL/b_2  = dL/dy * dy/dz_2 * dz_2/dy_2 * dy_2/db_2
+# dL/b_1  = dL/dy *    dy/dz_2 *         dz_2/dy_2       * dy_2/z_1  *      dz_1/dy_1          * dy_1/db_1
+#       =  1/2 * (2y-2Y)  *       w    *    sg(y_1)(1-sg(y_1))   *    w_2    *  sg(y_2)(1-sg(y_2))
 # Und nun in Code umsetzen
 
 
