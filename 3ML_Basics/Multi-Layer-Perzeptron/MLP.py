@@ -7,12 +7,12 @@
 # x -> x*w1 + b1 -> *w2 + b2 -> *w3 + b3 -> y
 #
 # Dann zur Berechnung:
-# L = 1/2(Y-y)^2 #dL/dy = (Y-y)
-# y = w*z_2 + b #dy/dz_2 = w
-# z1 = sigmoid(y_1) # dz1/dy-1 = sigmoid(y_1) * (1-sigmoid(y_1)
-# y1 = w_2*z_1 + b_2# dy1/dz1=w2
-# z2 = sigmoid(y_2)#dz2/dy_2 = sigmoid(y_2) * (1-sigmoid(y_2)
-# y2 = w_3*x + b_3#dy2/w_3 = x
+# L = 1/2(Y-y)^2  -> Unser Loss
+# y_1 = w_1 * z_2 + b -> Ergebnis nach Layer 1
+# z_1 = sigmoid(y_1)  -> Unsere Non-Linearity nach Layer 1
+# y_2 = w_2 * z_1 + b_2 -> Ergebnis nach Layer 2
+# z_2 = sigmoid(y_2) -> Unsere Non-Linearity nach Layer 2
+# y = w_3 * z_2 + b_3 -> Unser Output - Ergebnis nach Layer 3
 
 # dL/dw  = dL/dy * dy/dw
 # dL/dw2 = dL/dy * dy/dz_1 * dz_2/dy_1 * dy_1/dw_2
