@@ -25,6 +25,10 @@
 # dL/b_2  = dL/dy * dy/dz_2 * dz_2/dy_2 * dy_2/db_2
 # dL/b_1  = dL/dy *    dy/dz_2 *         dz_2/dy_2       * dy_2/z_1  *      dz_1/dy_1          * dy_1/db_1
 
+# Ableitung sig:
+# = sig(t) * (1 - sig(t))
+
+
 # Und nun in Code umsetzen
 
 
