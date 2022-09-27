@@ -7,12 +7,12 @@
 # x -> x * w1 + b1 -> sig -> * w2 + b2 -> sig -> * w3 + b3 -> y
 #
 # Dann zur Berechnung:
-# L = 1/2 * (Y - y)^2   -> Unser Loss
+# L = 1/2 * (Y - y)^2     -> Unser Loss
 # y_1 = w_1 * z_2 + b_1   -> Ergebnis nach Layer 1
-# z_1 = sigmoid(y_1)    -> Unsere Non-Linearity nach Layer 1
-# y_2 = w_2 * z_1 + b_2 -> Ergebnis nach Layer 2
-# z_2 = sigmoid(y_2)    -> Unsere Non-Linearity nach Layer 2
-# y = w_3 * z_2 + b_3   -> Unser Output - Ergebnis nach Layer 3
+# z_1 = sigmoid(y_1)      -> Unsere Non-Linearity nach Layer 1
+# y_2 = w_2 * z_1 + b_2   -> Ergebnis nach Layer 2
+# z_2 = sigmoid(y_2)      -> Unsere Non-Linearity nach Layer 2
+# y = w_3 * z_2 + b_3     -> Unser Output - Ergebnis nach Layer 3
 
 
 # Ableitungen für die Gewichte:
