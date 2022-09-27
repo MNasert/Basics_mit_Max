@@ -4,7 +4,7 @@
 # # Hier nochmal zur Mathematik:
 # Wir nehmen an, dass wir ein 3-lagiges Netz haben d.h.:
 #
-# x -> x*w1 + b1 -> *w2 + b2 -> *w3 + b3 -> y
+# x -> x * w1 + b1 -> sig -> * w2 + b2 -> sig -> * w3 + b3 -> y
 #
 # Dann zur Berechnung:
 # L = 1/2(Y-y)^2  -> Unser Loss
