@@ -13,10 +13,11 @@
 ###########                           WIP                      ###############################
 """
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 class Layer:
-    def __init__(self, lr: float = .1) -> None:
+    def __init__(self, lr: float = .05) -> None:
         self.wm = np.array([])
         self.gradW = None
         self.prevX = None
@@ -101,13 +102,9 @@ class MSE:
 
 
 model = Sequential([
-    LinearLayer(2, 3),
+    LinearLayer(2, 10),
     Sigmoid(),
-    LinearLayer(3, 5),
-    Sigmoid(),
-    LinearLayer(5, 3),
-    Sigmoid(),
-    LinearLayer(3, 1)
+    LinearLayer(10, 1)
 ], MSE())
 
 # XOR funktion input
@@ -125,10 +122,30 @@ y = np.array([
     [[0]]
 ])
 
-for epoch in range(1000):
+local_losshist = []
+global_losshist = []
+tries = 3
+
+while True:
     for index in range(len(x)):
         output = model.forward(x[index])
         model.backward(y[index], output)
         model.step()
-        print(f"X ->{x[index]} -> Target: {y[index]} vs prediction:{output}")
+        local_losshist.append(model.criterion.forward(y[index], output).item())
+    global_losshist.append(sum(local_losshist))
+    if len(global_losshist) > 1:
+        if global_losshist[-2] < global_losshist[-1]:
+            tries -= 1
+            if tries <= 0:
+                break
 
+    local_losshist = []
+
+for idx in range(len(x)):
+    output = model.forward(x[idx])
+    print(f"X ->{x[idx]} -> Target: {y[idx]} vs prediction:{output}")
+
+plt.plot([x for x in range(len(global_losshist))], global_losshist)
+plt.xlabel("Epochen")
+plt.ylabel("Fehler")
+plt.show()

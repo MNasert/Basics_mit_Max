@@ -43,17 +43,16 @@ import numpy as np
 
 
 class Layer:
-    def __init__(self) -> None:
-        self.wm = None
-        self.bm = None
+    def __init__(self, lr: float = .05) -> None:
+        self.wm = np.array([])
         self.gradW = None
-        self.gradB = None
         self.prevX = None
+        self.lr = lr
 
-    def forward(self, x) -> any:
+    def forward(self, *args, **kwargs) -> any:
         raise NotImplementedError
 
-    def backward(self, grad) -> any:
+    def backward(self, *args, **kwargs) -> any:
         raise NotImplementedError
 
     def step(self) -> None:
@@ -64,54 +63,89 @@ class LinearLayer(Layer):
     def __init__(self, insize, outsize) -> None:
         super(LinearLayer, self).__init__()
         self.wm = np.random.rand(insize, outsize)
-        self.bm = np.random.rand(1, outsize)
 
-    def forward(self, x) -> np.ndarray:
-        self.prevX = x
-        return x @ self.wm + self.bm
+    def forward(self, _x) -> np.ndarray:
+        self.prevX = _x
+        return _x @ self.wm
 
-    def backward(self, grad) -> tuple[any, any]:
-        self.gradW = None  # hier Berechnung
-        self.gradB = None  # hier Berechnung
-        return self.gradW, self.gradB
+    def backward(self, grad: np.ndarray) -> np.ndarray:
+        out_grad = 0  # berechnung
+        self.gradW = 0  # berechnung
+        return out_grad  # Berechnungen ausfüllen
 
     def step(self) -> None:
-        self.wm -= self.gradW
-        self.bm -= self.gradB
+        self.wm -= self.lr * self.gradW
 
 
 class Sigmoid(Layer):
     def __init__(self) -> None:
         super(Sigmoid, self).__init__()
-        pass
 
-    def forward(self, x) -> any:
-        self.prevX = x
-        return 0  # hier sigmoidfunktion implementieren
+    def forward(self, _x: np.ndarray) -> np.ndarray:
+        self.prevX = _x
+        return  # hier sigmoidfunktion implementieren
 
-    def backward(self, grad) -> tuple[any, any]:
-        return 0, 0  # hier gradienten berechnen
+    def backward(self, _grad: np.ndarray) -> np.ndarray:
+        return  # hier gradienten berechnen
 
     def step(self) -> None:
         pass
 
 
 class Sequential:
-    def __init__(self, layers: list[Layer]) -> None:
+    def __init__(self, layers: list[Layer], criterion) -> None:
         self.layers = layers
+        self.criterion = criterion
         self.prev_out = None
         self.prev_in = None
 
-    def forward(self, x) -> any:
-        out = x
-        for layer in self.layers:
-            out = layer.forward(x)
+    def forward(self, _x: np.ndarray) -> np.ndarray:
+        self.prev_in = _x
+        out = _x
+        for _layer in self.layers:  # wir gehen über jeden Layer
+            out = _layer.forward(out)
+        self.prev_out = out
         return out
 
-    def backward(self, target) -> None:
-        for layer in reversed(self.layers):
-            target = layer.backward(target)
+    def backward(self, _target: np.ndarray, _prediction: np.ndarray) -> None:
+        grad = self.criterion.backward(_target, self.prev_out)
+        for _layer in reversed(self.layers):  # wir gehen rückwärts über jeden Layer
+            grad = _layer.backward(grad)
 
     def step(self) -> None:
-        for layer in self.layers:
-            layer.step()
+        for _layer in self.layers:  # wir führen step() in jedem layer aus
+            _layer.step()
+
+
+class MSE:
+    @staticmethod  # sagt uns dass diese Methode auch ohne Klassenobjekt funktioniert (ohne self)
+    def forward(_target: np.ndarray, _prediction: np.ndarray) -> np.ndarray:
+        return (1/_target.size) * (_target - _prediction)**2
+
+    @staticmethod
+    def backward(_target: np.ndarray, _prediction: np.ndarray) -> np.ndarray:
+        return  # hier gradienten berechnen
+
+
+model = Sequential([
+    # hier passende Layer einfügen z.b. LinearLayer(2, y), Sigmoid()
+
+])
+
+# XOR funktion input
+x = np.array([
+        [[1, 1]],
+        [[1, 0]],
+        [[0, 1]],
+        [[0, 0]]
+])
+# XOR funktion output
+y = np.array([
+    [[0]],
+    [[1]],
+    [[1]],
+    [[0]]
+])
+
+local_losshist = []
+global_losshist = []
