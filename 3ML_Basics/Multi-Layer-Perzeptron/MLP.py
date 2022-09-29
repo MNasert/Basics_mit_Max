@@ -7,7 +7,7 @@
 # x -> x * w1 + b1 -> sig -> * w2 + b2 -> sig -> * w3 + b3 -> y
 #
 # Dann zur Berechnung:
-# y_1 = x * w_1 + b_1   -> Ergebnis nach Layer 1
+# y_1 = x * w_1 + b_1     -> Ergebnis nach Layer 1
 # z_1 = sigmoid(y_1)      -> Unsere Non-Linearity nach Layer 1
 # y_2 = z_1 * w_2 + b_2   -> Ergebnis nach Layer 2
 # z_2 = sigmoid(y_2)      -> Unsere Non-Linearity nach Layer 2
